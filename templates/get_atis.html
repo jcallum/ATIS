@@ -3,12 +3,14 @@
     <head>
         <meta charset="utf-8" />
         <title>GET ATIS</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',
+         filename='site.css')}}" />
     </head>
     <body>
         {%if icao %}
-            <strong>ICAO is {{ icao }}!</strong>.
+            <span class="message">ICAO is {{ icao }}!</span>.
         {% else %}
-            What station? Provide it after /atis/ in the URL.
+        <span class="message">What station? Provide it after /atis/ in the URL.</span>
         {% endif %}
     </body>
 </html>
