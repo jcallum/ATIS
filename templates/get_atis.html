@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>GET ATIS</title>
+    </head>
+    <body>
+        {%if icao %}
+            <strong>ICAO is {{ icao }}!</strong>.
+        {% else %}
+            What station? Provide it after /atis/ in the URL.
+        {% endif %}
+    </body>
+</html>
