@@ -7,10 +7,17 @@
          filename='site.css')}}" />
     </head>
     <body>
-        {%if icao %}
-            <span class="message">ICAO is {{ icao }}!</span>.
-        {% else %}
-        <span class="message">What station? Provide it after /atis/ in the URL.</span>
-        {% endif %}
+       <div>
+        <form method="POST" action="/">
+            {{ form.csrf.token }}
+            {%if icao  %} 
+                {{ form.icao.label }} {{ form.icao(size=4) }}
+                <input type="submit" value="Enter">
+        
+             {% else %}
+                 <span class="message">What station? Provide it after the URL.</span>
+             {% endif %}
+        </form>        
+       </div> 
     </body>
 </html>

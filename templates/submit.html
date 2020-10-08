@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>GET ATIS</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',
+         filename='site.css')}}" />
+    </head>
+    <body>
+       <div>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            {{ form.name.label }} {{ form.name(size=20) }}
+            <input type="submit" value="Go">
+        </form>
+       </div> 
+    </body>
+</html>    
