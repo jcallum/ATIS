@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %} Enter ICAO{% endblock %}
+{% block title %} Enter ICAO {% endblock %}
 
 {% block content%}
     <div class='container'>
         <form method="POST" action="/">
             {{ form.csrf_token }}
-            {{ form.icao.label }} {{ form.icao(size=20) }}
-            <input type="submit" value="Go">
+            {{ form.icao.label }} {{ form.icao.data }}
+            {{ form.station_name.label}} {{ form.station_name.data}}
+            <input type="submit" value="Return">
         </form>
     </div>
 {% endblock %}

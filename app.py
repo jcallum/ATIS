@@ -6,15 +6,15 @@ from flask import Flask, redirect, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
+from forms import InputForm, DisplayForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-class MyForm(FlaskForm):
-    icao = StringField('ICAO code', validators=[DataRequired()])
-
+global resp
 
 def get_metar(icao):
+    global resp
     code = icao.data
     hdr = {"X-API-Key": "3c5ff1a1547644ffac404bdeba"}
     req = requests.get("https://api.checkwx.com/metar/" + code + "/decoded", headers=hdr)
@@ -34,21 +34,29 @@ def get_metar(icao):
 
 
 def get_atis(icao):
+    global resp
     print("In get_atis", icao)
-    get_metar(icao)
-    return
+    resp = get_metar(icao)
+    return resp
 
 @app.route('/', methods=('GET', 'POST'))
 def submit():
-    form = MyForm()
+    global resp
+    form = InputForm()
     if form.validate_on_submit():
-        get_atis(form.icao)
-        return redirect('/success')
+        resp = get_atis(form.icao)
+        return redirect('/success',)
     return render_template('submit.html', form=form)
 
 @app.route('/success')
 def success():
-    return redirect('/display')
+    global resp
+    form = DisplayForm()
+    metar_data = resp.get('data')
+    form.icao.data = metar_data[0].get('icao')
+    form.station_name.data = metar_data[0].get('station', 'name')
+    #print(form.icao.data)
+    return render_template('atis.html', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)   
