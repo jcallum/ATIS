@@ -52,9 +52,16 @@ def submit():
 def success():
     global resp
     form = DisplayForm()
-    metar_data = resp.get('data')
-    form.icao.data = metar_data[0].get('icao')
-    form.station_name.data = metar_data[0].get('station', 'name')
+    metar = resp.get('data')
+    metar = metar[0]
+    form.icao.data = metar['icao']
+    form.station_name.data = metar['station']['name']
+    form.raw_metar.data = metar['raw_text']
+    form.time_zulu.data = metar['observed']
+    form.wind_dir.data = metar['wind']['degrees']
+    form.wind_spd.data = metar['wind']['speed_kts']
+    form.wind_gusts.data = metar['wind']['gust_kts']
+
     #print(form.icao.data)
     return render_template('atis.html', form=form)
 

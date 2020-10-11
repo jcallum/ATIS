@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %} Enter ICAO {% endblock %}
+{% block title %} Display Metar {% endblock %}
 
 {% block content%}
     <div class='container'>
         <form method="POST" action="/">
             {{ form.csrf_token }}
-            {{ form.icao.label }} {{ form.icao.data }}
-            {{ form.station_name.label}} {{ form.station_name.data}}
-            <input type="submit" value="Return">
+            <p><b>{{ form.icao.label }} </b> {{ form.icao.data }}</p>
+            <p>{{ form.station_name.label}} {{ form.station_name.data}}</p>
+            <p>{{ form.raw_metar.label}} {{ form.raw_metar.data}}</p>
+            <p>{{ form.time_zulu.label}} {{ form.time_zulu.data}}</p>
+            <p>{{ form.wind_dir.label}} {{ form.wind_dir.data}} degrees at {{ form.wind_spd.data }} knots
+                gusting to {{form.wind_gusts.data}} knots        </p>
+            <p><input type="submit" value="Return"></p>
         </form>
     </div>
 {% endblock %}
