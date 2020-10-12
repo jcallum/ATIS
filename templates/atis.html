@@ -7,12 +7,13 @@
         <form method="POST" action="/">
             {{ form.csrf_token }}
             <p><b>{{ form.icao.label }} </b> {{ form.icao.data }}</p>
-            <p>{{ form.station_name.label}} {{ form.station_name.data}}</p>
-            <p>{{ form.raw_metar.label}} {{ form.raw_metar.data}}</p>
-            <p>{{ form.time_zulu.label}} {{ form.time_zulu.data}}</p>
-            <p>{{ form.wind_dir.label}} {{ form.wind_dir.data}} degrees at {{ form.wind_spd.data }} knots
-                gusting to {{form.wind_gusts.data}} knots        </p>
-            <p><input type="submit" value="Return"></p>
+            <p><b>{{ form.station_name.label }} </b> {{ form.station_name.data }}</p>
+            <p><b>{{ form.raw_metar.label }} </b> {{ form.raw_metar.data }}</p>
+            <p><b>{{ form.time_zulu.label }} </b> {{ form.time_zulu.data }}</p>
+            <p><b>{{ form.wind_dir.label }} </b> {{ form.wind_dir.data }} degrees at {{ form.wind_spd.data }} knots
+                gusting to {{form.wind_gusts.data }} knots        </p>
+            <p><b> {{ form.visibility.label }}</b> {{ form.visibility.data }} statute miles </p>
+            <p><input type="submit" value="Return"> </p>
         </form>
     </div>
 {% endblock %}

@@ -14,3 +14,4 @@ class DisplayForm(FlaskForm):
     wind_dir = StringField('Wind: ', validators=[DataRequired()])
     wind_spd = StringField('Wind Speed', validators=[DataRequired()])
     wind_gusts = StringField('Gusts:', validators=[DataRequired()])
+    visibility = StringField('Visibility:', validators=[DataRequired()])

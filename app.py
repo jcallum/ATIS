@@ -58,9 +58,17 @@ def success():
     form.station_name.data = metar['station']['name']
     form.raw_metar.data = metar['raw_text']
     form.time_zulu.data = metar['observed']
-    form.wind_dir.data = metar['wind']['degrees']
-    form.wind_spd.data = metar['wind']['speed_kts']
-    form.wind_gusts.data = metar['wind']['gust_kts']
+    if 'wind' in metar:
+        form.wind_dir.data = metar['wind']['degrees']
+        form.wind_spd.data = metar['wind']['speed_kts']
+        if 'gust_kts' in metar['wind']:
+            form.wind_gusts.data = metar['wind']['gust_kts']
+        else:
+            form.wind_gusts.data = None
+    else:
+        form.wind_dir.data = '000'
+        form.wind_spd.data = '00'
+    form.visibility.data = metar['visibility'] ['miles']
 
     #print(form.icao.data)
     return render_template('atis.html', form=form)
